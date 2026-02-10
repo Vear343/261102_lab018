@@ -6,22 +6,16 @@ struct Rect{
 };
 
 double overlap(Rect r1, Rect r2){
-	double width = min(r1.x + r1.w, r2.x + r2.w) - max(r1.x,r2.x);
-	double height = min(r1.y + r1.h, r2.y + r2.h) - max(r1.y,r2.y);
-
-	cout << "Width = " << min(r1.x + r1.w, r2.x + r2.w) - max(r1.x,r2.x) << endl;
-	cout << "Height = " << min(r1.y + r1.h, r2.y + r2.h) - max(r1.y,r2.y) << endl;
-
-	double area = width * height;
+	double Pos_x1 = max(r1.x,r2.x);
+	double Pos_x2 = min(r1.x + r1.w, r2.x + r2.w);
+	double Pos_y1 = min(r1.y,r2.y);
+	double Pos_y2 = max(r1.y - r1.h, r2.y - r2.h);
+	double area;
+	if (Pos_x1 > Pos_x2) area = 0;
+	else{
+		double width = Pos_x2 - Pos_x1;
+		double height = Pos_y1 - Pos_y2;
+		area = width * height;
+	}
 	return area;
 }
-
-int main(){
-	Rect R1 = {-1,2,6.9,9.6};
-	Rect R2 = {0,0,1.2,2.5};
-	cout << overlap(R1,R2) << endl;
-
-	Rect R3 = {1,1,5,5};
-	Rect R4 = {2,2,5,5};	
-	cout << overlap(R3,R4);	
-}                                              
